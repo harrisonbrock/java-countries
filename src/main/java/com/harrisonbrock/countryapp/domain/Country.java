@@ -8,9 +8,9 @@ public class Country {
     private final String name;
     private final long population;
     private final long landMss;
-    private final short medianAge;
+    private final int medianAge;
 
-    public Country(String name, long population, long landMss, short medianAge) {
+    public Country(String name, long population, long landMss, int medianAge) {
 
         this.id = counter.incrementAndGet();
         this.name = name;
@@ -35,7 +35,7 @@ public class Country {
         return landMss;
     }
 
-    public short getMedianAge() {
+    public int getMedianAge() {
         return medianAge;
     }
 }
