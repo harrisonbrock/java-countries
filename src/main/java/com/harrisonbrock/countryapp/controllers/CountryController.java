@@ -67,4 +67,13 @@ public class CountryController {
                 .orElse(null);
         return country;
     }
+
+    @RequestMapping("/population/max")
+    public Country getCountryWithMaxPopulation(){
+        List<Country> countries = CountryAppApplication.countryList.countryList;
+        Country country = countries.stream()
+                .max(Comparator.comparing(Country::getPopulation))
+                .orElse(null);
+        return country;
+    }
 }
