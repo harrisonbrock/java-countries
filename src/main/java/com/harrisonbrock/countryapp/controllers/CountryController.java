@@ -85,4 +85,23 @@ public class CountryController {
 
         return countries;
     }
+
+    @RequestMapping("/age/min")
+    public Country getMinMedian() {
+        Country country = CountryAppApplication.countryList.countryList
+                .stream()
+                .min(Comparator.comparing(Country::getMedianAge))
+                .orElse(null);
+        return country;
+    }
+
+    @RequestMapping("/age/max")
+    public Country getMaxMedian() {
+        Country country = CountryAppApplication.countryList.countryList
+                .stream()
+                .max(Comparator.comparing(Country::getMedianAge))
+                .orElse(null);
+        return country;
+    }
+
 }
