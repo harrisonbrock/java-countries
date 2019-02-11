@@ -20,7 +20,7 @@ public class CountryController {
         return CountryAppApplication.countryList.countryList;
     }
 
-    @RequestMapping("/names/begin")
+    @RequestMapping("/names/size")
     public List<Country> getCountriesLike(@RequestParam(value = "letters") String letters) {
         CountryAppApplication.countryList.countryList.sort(Comparator.comparing(Country::getName));
 
@@ -29,6 +29,18 @@ public class CountryController {
                 .countryList.countryList
                 .stream()
                 .filter(c -> c.getName().toLowerCase().startsWith(letters.toLowerCase())).collect(Collectors.toList());
+        return newList;
+    }
+
+    @RequestMapping("/names/begin")
+    public List<Country> getCountriesStartWith(@RequestParam(value = "letter") String letter) {
+        CountryAppApplication.countryList.countryList.sort(Comparator.comparing(Country::getName));
+
+        List<Country> newList;
+        newList = CountryAppApplication
+                .countryList.countryList
+                .stream()
+                .filter(c -> c.getName().toLowerCase().startsWith(letter.toLowerCase())).collect(Collectors.toList());
         return newList;
     }
 }
