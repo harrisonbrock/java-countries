@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 @RestController
@@ -55,5 +57,14 @@ public class CountryController {
                 .stream()
                 .filter(c -> c.getPopulation() >= people).collect(Collectors.toList());
         return newList;
+    }
+
+    @RequestMapping("/population/min")
+    public Country getCountryWithMinPopulation(){
+        List<Country> countries = CountryAppApplication.countryList.countryList;
+        Country country = countries.stream()
+                .min(Comparator.comparing(Country::getPopulation))
+                .orElse(null);
+        return country;
     }
 }
