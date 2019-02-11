@@ -76,4 +76,13 @@ public class CountryController {
                 .orElse(null);
         return country;
     }
+
+    @RequestMapping("/age/age")
+    public List<Country> getMedianGreaterOrEqualTo(@RequestParam(value = "age") int age) {
+        List<Country> countries = CountryAppApplication.countryList.countryList
+                .stream()
+                .filter(c -> c.getMedianAge() >= age).collect(Collectors.toList());
+
+        return countries;
+    }
 }
