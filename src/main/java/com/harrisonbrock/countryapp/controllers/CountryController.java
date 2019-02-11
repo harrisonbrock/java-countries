@@ -21,14 +21,14 @@ public class CountryController {
     }
 
     @RequestMapping("/names/size")
-    public List<Country> getCountriesLike(@RequestParam(value = "letters") String letters) {
+    public List<Country> getCountriesLike(@RequestParam(value = "letters") int letters) {
         CountryAppApplication.countryList.countryList.sort(Comparator.comparing(Country::getName));
 
         List<Country> newList;
         newList = CountryAppApplication
                 .countryList.countryList
                 .stream()
-                .filter(c -> c.getName().toLowerCase().startsWith(letters.toLowerCase())).collect(Collectors.toList());
+                .filter(c -> c.getName().length() >= letters).collect(Collectors.toList());
         return newList;
     }
 
