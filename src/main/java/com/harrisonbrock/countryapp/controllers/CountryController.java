@@ -43,4 +43,17 @@ public class CountryController {
                 .filter(c -> c.getName().toLowerCase().startsWith(letter.toLowerCase())).collect(Collectors.toList());
         return newList;
     }
+
+    @RequestMapping("/population/size")
+    public List<Country> getCountriesWithPopulationGreatThenOrEqualTo(@RequestParam(value = "people") int people) {
+        List<Country> newList;
+        CountryAppApplication
+                .countryList.countryList
+                .sort(Comparator.comparing(Country::getPopulation).reversed());
+        newList = CountryAppApplication
+                .countryList.countryList
+                .stream()
+                .filter(c -> c.getPopulation() >= people).collect(Collectors.toList());
+        return newList;
+    }
 }
